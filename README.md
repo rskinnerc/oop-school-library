@@ -1,56 +1,44 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Project Name
+# OOP School Library
 
-> Description the project.
+> A command-line Ruby app for managing a library including adding students and teachers and recording book rentals.
 
 
 ## Built With
 
-- Major languages
-- Frameworks
-- Technologies used
-
-## Live Demo (if available)
-
-[Live Demo Link](https://livedemo.com)
+- Ruby
+- Gems
+- Bundler
 
 
 ## Getting Started
 
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
+**This project is an implementation of OOP features with Ruby.**
 
 
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
+- Ruby
 
 ### Setup
-
+Clone this repository in your local machine by using `git clone git@github.com:rskinnerc/oop-school-library.git`
 ### Install
-
+Install the dependencies with `bundle install`
 ### Usage
-
-### Run tests
-
-### Deployment
-
-
+You can use `irb` to run your program:
+- Create a new student by running `student = Student.new(AGE, CLASSROOM)`
+- Create a new Teacher by running `teacher = Teacher.new(AGE, SPECIALIZATION)`
 
 ## Authors
 
-👤 **Author1**
+👤 **Ronald Skinner**
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+- GitHub: [@rskinnerc](https://github.com/rskinnerc)
+- Twitter: [@XSkinner](https://twitter.com/XSkinner)
+- LinkedIn: [Ronald Skinner Cardenas](https://www.linkedin.com/in/rskinnerc/)
 
-👤 **Author2**
-
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
 
 ## 🤝 Contributing
 
@@ -67,7 +55,3 @@ Give a ⭐️ if you like this project!
 - Hat tip to anyone whose code was used
 - Inspiration
 - etc
-
-## 📝 License
-
-This project is [MIT](./MIT.md) licensed.
