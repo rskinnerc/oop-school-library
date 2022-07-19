@@ -1,6 +1,6 @@
 class Decorator < Namable
   def initialize(namable)
-    super
+    super()
     @namable = namable
   end
 
