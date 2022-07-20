@@ -1,4 +1,6 @@
 require './book'
+require './student'
+require './teacher'
 
 class App
   def initialize
@@ -13,6 +15,7 @@ class App
     ]
 
     @books = []
+    @people = []
     puts 'Welcome to School Library App!'
     puts ''
   end
@@ -51,7 +54,32 @@ class App
   end
 
   def create_person
-    puts 'Creating a person:'
+    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
+    type = gets.chomp.to_i
+    if not(type.between?(1, 2)) 
+      puts 'Invalid person type.'
+      puts ''
+      run
+      return
+    end
+
+    print 'Age: '
+    age = gets.chomp.to_i
+    print 'Name: '
+    name = gets.chomp
+
+    if type == 1
+      print 'Has parent permission? [Y/N]: '
+      parent_permission = gets.chomp.upcase == 'Y' ? true : false
+      @people << Student.new(age, nil, name, parent_permission: parent_permission)
+    else type == 2 
+      print 'Specialization: '
+      specialization = gets.chomp
+      @people << Teacher.new(age, specialization, name)
+    end
+
+    puts ''
+    run
   end
 
   def create_book
