@@ -1,3 +1,5 @@
+require './book'
+
 class App
   def initialize
     @options = [
@@ -39,6 +41,8 @@ class App
       run
     else
       @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
+      puts ''
+      run
     end
   end
 
@@ -51,7 +55,14 @@ class App
   end
 
   def create_book
-    puts 'Creating a book:'
+    print 'Title: '
+    title = gets.chomp
+    print 'Author: '
+    author = gets.chomp
+    @books << Book.new(title, author)
+    puts 'Book created successfully!'
+    puts ''
+    run
   end
 
   def create_rental
