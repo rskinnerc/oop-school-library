@@ -2,8 +2,8 @@
 require './app'
 
 def main
-  app = App.new()
-  app.run()
+  app = App.new
+  app.run
 end
 
-main()
+main
