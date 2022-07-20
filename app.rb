@@ -1,6 +1,7 @@
 require './book'
 require './student'
 require './teacher'
+require './rental'
 
 class App
   def initialize
@@ -16,6 +17,7 @@ class App
 
     @books = []
     @people = []
+    @rentals = []
     puts 'Welcome to School Library App!'
     puts ''
   end
@@ -102,7 +104,22 @@ class App
   end
 
   def create_rental
-    puts 'Creating a rental:'
+    puts 'Select a book from the following list by number: '
+    @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
+    selected_book = @books[gets.chomp.to_i]
+    puts ''
+
+    puts 'Select a person from the following list by number (not ID): '
+    @people.each_with_index { |person, index| puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+    selected_person = @people[gets.chomp.to_i]
+    puts ''
+
+    print 'Enter the rental date (YYYY/MM/DD): '
+    rental_date = gets.chomp
+    @rentals << Rental.new(rental_date, selected_person, selected_book)
+    print 'Rental created successfully!'
+    puts ''
+    run
   end
 
   def list_rentals
