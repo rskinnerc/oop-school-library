@@ -10,6 +10,7 @@ class App
       { id: 7, name: '7 - Exit', action: 'exit_app' }
     ]
 
+    @books = []
     puts 'Welcome to School Library App!'
     puts ''
   end
@@ -22,7 +23,7 @@ class App
   end
 
   def action(choice)
-    if choice > @options.length
+    if choice > @options.length || choice.zero?
       (puts 'Invalid option. Please try again.')
     else
       @options.each do |option|
@@ -32,7 +33,13 @@ class App
   end
 
   def list_books
-    puts 'Listing all books:'
+    if @books.empty?
+      puts 'There are no books.'
+      puts ''
+      run
+    else
+      @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
+    end
   end
 
   def list_people
