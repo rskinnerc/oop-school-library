@@ -42,31 +42,27 @@ class App
   def list_books
     if @books.empty?
       puts 'There are no books.'
-      puts ''
-      run
     else
       @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
-      puts ''
-      run
     end
+    puts ''
+    run
   end
 
   def list_people
     if @people.empty?
       puts 'There are no people.'
-      puts ''
-      run
     else
       @people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
-      puts ''
-      run
     end
+    puts ''
+    run
   end
 
   def create_person
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
     type = gets.chomp.to_i
-    if not(type.between?(1, 2)) 
+    unless type.between?(1, 2)
       puts 'Invalid person type.'
       puts ''
       run
@@ -78,18 +74,23 @@ class App
     print 'Name: '
     name = gets.chomp
 
-    if type == 1
-      print 'Has parent permission? [Y/N]: '
-      parent_permission = gets.chomp.upcase == 'Y' ? true : false
-      @people << Student.new(age, nil, name, parent_permission: parent_permission)
-    else type == 2 
-      print 'Specialization: '
-      specialization = gets.chomp
-      @people << Teacher.new(age, specialization, name)
-    end
+    type == 1 ? create_student(age, name) : create_teacher(age, name)
 
+    puts 'Person created successfully!'
     puts ''
     run
+  end
+
+  def create_student(age, name)
+    print 'Has parent permission? [Y/N]: '
+    parent_permission = gets.chomp.upcase == 'Y'
+    @people << Student.new(age, nil, name, parent_permission: parent_permission)
+  end
+
+  def create_teacher(age, name)
+    print 'Specialization: '
+    specialization = gets.chomp
+    @people << Teacher.new(age, specialization, name)
   end
 
   def create_book
@@ -110,7 +111,9 @@ class App
     puts ''
 
     puts 'Select a person from the following list by number (not ID): '
-    @people.each_with_index { |person, index| puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+    @people.each_with_index do |person, index|
+      puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    end
     selected_person = @people[gets.chomp.to_i]
     puts ''
 
@@ -123,11 +126,18 @@ class App
   end
 
   def list_rentals
-    puts 'Listing all rentals:'
+    print 'Enter the person ID: '
+    id = gets.chomp.to_i
+    filtered_rentals = @rentals.select do |rental|
+      rental.person.id == id
+    end
+    filtered_rentals.each { |rental| puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}" }
+    puts ''
+    run
   end
 
   def exit_app
-    puts 'Exiting app...'
+    puts 'Thank you for using this app!'
     exit
   end
 end
