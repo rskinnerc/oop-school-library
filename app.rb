@@ -50,7 +50,15 @@ class App
   end
 
   def list_people
-    puts 'Listing all people:'
+    if @people.empty?
+      puts 'There are no people.'
+      puts ''
+      run
+    else
+      @people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+      puts ''
+      run
+    end
   end
 
   def create_person
