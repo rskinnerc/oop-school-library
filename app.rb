@@ -34,7 +34,7 @@ class App
       (puts 'Invalid option. Please try again.')
     else
       @options.each do |option|
-        send(option[:action]) if option[:id] == choice
+        send(:option[:action]) if option[:id] == choice
       end
     end
   end
