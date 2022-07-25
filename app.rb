@@ -12,11 +12,11 @@ class App
     puts ''
   end
 
-  def action(choice)
-    if choice > @options.length || choice.zero?
+  def action(choice, options)
+    if choice > options.length || choice.zero?
       (puts 'Invalid option. Please try again.')
     else
-      @options.each do |option|
+      options.each do |option|
         send(option[:action]) if option[:id] == choice
       end
     end
@@ -29,7 +29,6 @@ class App
       @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
     end
     puts ''
-    run
   end
 
   def list_people
@@ -39,7 +38,6 @@ class App
       @people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
     end
     puts ''
-    run
   end
 
   def create_person
@@ -48,7 +46,6 @@ class App
     unless type.between?(1, 2)
       puts 'Invalid person type.'
       puts ''
-      run
       return
     end
 
@@ -61,7 +58,6 @@ class App
 
     puts 'Person created successfully!'
     puts ''
-    run
   end
 
   def create_student(age, name)
@@ -84,7 +80,6 @@ class App
     @books << Book.new(title, author)
     puts 'Book created successfully!'
     puts ''
-    run
   end
 
   def create_rental
@@ -105,7 +100,6 @@ class App
     @rentals << Rental.new(rental_date, selected_person, selected_book)
     print 'Rental created successfully!'
     puts ''
-    run
   end
 
   def list_rentals
@@ -116,11 +110,5 @@ class App
     end
     filtered_rentals.each { |rental| puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}" }
     puts ''
-    run
-  end
-
-  def exit_app
-    puts 'Thank you for using this app!'
-    exit
   end
 end

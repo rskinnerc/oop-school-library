@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 require './app'
-def run  
-  @options = [
+
+def main
+  options = [
     { id: 1, name: '1 - List all books', action: 'list_books' },
     { id: 2, name: '2 - List all people', action: 'list_people' },
     { id: 3, name: '3 - Create a person', action: 'create_person' },
@@ -10,16 +11,19 @@ def run
     { id: 6, name: '6 - List all rentals for a given person id', action: 'list_rentals' },
     { id: 7, name: '7 - Exit', action: 'exit_app' }
   ]
-
-  puts 'Please choose an option by entering a number:'
-  @options.each { |option| puts option[:name] }
-  choice = gets.chomp.to_i
-  return choice
-end
-
-def main
   app = App.new
-  run
+  exit=0
+  while (exit==0)
+    puts 'Please choose an option by entering a number:'
+    options.each { |option| puts option[:name] }
+    choice = gets.chomp.to_i
+    if(choice==7)
+      puts 'Thank you for using this app!'
+      exit=1
+    elsif
+    app.action(choice, options)
+    end
+  end
 end
 
 main
