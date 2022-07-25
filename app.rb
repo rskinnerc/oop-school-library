@@ -5,16 +5,6 @@ require './rental'
 
 class App
   def initialize
-    @options = [
-      { id: 1, name: '1 - List all books', action: 'list_books' },
-      { id: 2, name: '2 - List all people', action: 'list_people' },
-      { id: 3, name: '3 - Create a person', action: 'create_person' },
-      { id: 4, name: '4 - Create a book', action: 'create_book' },
-      { id: 5, name: '5 - Create a rental', action: 'create_rental' },
-      { id: 6, name: '6 - List all rentals for a given person id', action: 'list_rentals' },
-      { id: 7, name: '7 - Exit', action: 'exit_app' }
-    ]
-
     @books = []
     @people = []
     @rentals = []
@@ -22,18 +12,11 @@ class App
     puts ''
   end
 
-  def run
-    puts 'Please choose an option by entering a number:'
-    @options.each { |option| puts option[:name] }
-    choice = gets.chomp.to_i
-    action choice
-  end
-
-  def action(choice)
-    if choice > @options.length || choice.zero?
+  def action(choice, options)
+    if choice > options.length || choice.zero?
       (puts 'Invalid option. Please try again.')
     else
-      @options.each do |option|
+      options.each do |option|
         send(option[:action]) if option[:id] == choice
       end
     end
@@ -46,7 +29,6 @@ class App
       @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
     end
     puts ''
-    run
   end
 
   def list_people
@@ -56,7 +38,6 @@ class App
       @people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
     end
     puts ''
-    run
   end
 
   def create_person
@@ -65,7 +46,6 @@ class App
     unless type.between?(1, 2)
       puts 'Invalid person type.'
       puts ''
-      run
       return
     end
 
@@ -78,7 +58,6 @@ class App
 
     puts 'Person created successfully!'
     puts ''
-    run
   end
 
   def create_student(age, name)
@@ -101,7 +80,6 @@ class App
     @books << Book.new(title, author)
     puts 'Book created successfully!'
     puts ''
-    run
   end
 
   def create_rental
@@ -122,7 +100,6 @@ class App
     @rentals << Rental.new(rental_date, selected_person, selected_book)
     print 'Rental created successfully!'
     puts ''
-    run
   end
 
   def list_rentals
@@ -133,11 +110,5 @@ class App
     end
     filtered_rentals.each { |rental| puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}" }
     puts ''
-    run
-  end
-
-  def exit_app
-    puts 'Thank you for using this app!'
-    exit
   end
 end
