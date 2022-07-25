@@ -12,18 +12,14 @@ def main
     { id: 7, name: '7 - Exit', action: 'exit_app' }
   ]
   app = App.new
-  exit=0
-  while (exit==0)
+  exit = 0
+  while exit.zero?
     puts 'Please choose an option by entering a number:'
     options.each { |option| puts option[:name] }
     choice = gets.chomp.to_i
-    if(choice==7)
-      puts 'Thank you for using this app!'
-      exit=1
-    elsif
-    app.action(choice, options)
-    end
+    choice == 7 ? exit = 1 : app.action(choice, options)
   end
 end
 
 main
+puts 'Thank you for using this app!'
