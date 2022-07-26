@@ -30,5 +30,4 @@ class Person < Namable
   def of_age?
     @age >= 18
   end
-
 end

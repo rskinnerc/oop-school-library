@@ -12,11 +12,11 @@ class Rental
 
   def to_json(*args)
     {
-      JSON.create_id  => self.class.name,
-      'a'             => [ date, person.id, book.title]
+      JSON.create_id => self.class.name,
+      'a' => [date, person.id, book.title]
     }.to_json(*args)
   end
- 
+
   def self.json_create(object)
     {
       date: object['a'][0],
