@@ -2,6 +2,7 @@ require './book'
 require './student'
 require './teacher'
 require './rental'
+require 'json'
 
 class App
   def initialize
@@ -110,5 +111,11 @@ class App
     end
     filtered_rentals.each { |rental| puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}" }
     puts ''
+  end
+
+  def save_data
+    File.write('books.json', JSON.generate(@books))
+    File.write('people.json', JSON.generate(@people))
+    File.write('rentals.json', JSON.generate(@rentals))
   end
 end

@@ -19,6 +19,7 @@ def main
     choice = gets.chomp.to_i
     choice == 7 ? exit = 1 : app.action(choice, options)
   end
+  app.save_data
 end
 
 main
