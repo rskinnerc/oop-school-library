@@ -7,7 +7,7 @@ require 'json'
 class App
   def initialize 
     @books = File.exists?("./books.json") ? JSON.parse(File.read("./books.json"),create_additions: true) : []
-    @people = File.exists?("./people.json") ? JSON.parse(File.read("./people.json")) : []
+    @people = File.exists?("./people.json") ? JSON.parse(File.read("./people.json"),create_additions: true) : []
     @rentals = File.exists?("./rentals.json") ? JSON.parse(File.read("./rentals.json")) : []
     puts 'Welcome to School Library App!'
     puts ''

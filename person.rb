@@ -2,7 +2,7 @@ require './namable'
 require './rental'
 
 class Person < Namable
-  attr_accessor :name, :age, :id, :rentals
+  attr_accessor :name, :age, :id, :rentals, :parent_permission
 
   def initialize(age, name = 'Unknown', parent_permission: true)
     super()
@@ -30,4 +30,5 @@ class Person < Namable
   def of_age?
     @age >= 18
   end
+
 end
