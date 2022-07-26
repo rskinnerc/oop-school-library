@@ -2,12 +2,20 @@ require './book'
 require './student'
 require './teacher'
 require './rental'
+require 'json'
 
 class App
   def initialize
-    @books = []
-    @people = []
-    @rentals = []
+    @books = File.exist?('./books.json') ? JSON.parse(File.read('./books.json'), create_additions: true) : []
+    @people = File.exist?('./people.json') ? JSON.parse(File.read('./people.json'), create_additions: true) : []
+    @rentals = if File.exist?('./rentals.json')
+                 JSON.parse(File.read('./rentals.json'),
+                            { create_additions: true }).map do |rental|
+                   load_rental_details(rental)
+                 end
+               else
+                 []
+               end
     puts 'Welcome to School Library App!'
     puts ''
   end
@@ -110,5 +118,17 @@ class App
     end
     filtered_rentals.each { |rental| puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}" }
     puts ''
+  end
+
+  def save_data
+    File.write('books.json', JSON.generate(@books))
+    File.write('people.json', JSON.generate(@people))
+    File.write('rentals.json', JSON.fast_generate(@rentals))
+  end
+
+  def load_rental_details(rental)
+    person = @people.filter { |per| per.id == rental[:person_id] }.first
+    book = @books.filter { |b| b.title == rental[:book_title] }.first
+    Rental.new(rental[:date], person, book)
   end
 end
