@@ -8,7 +8,7 @@ class App
   def initialize 
     @books = File.exists?("./books.json") ? JSON.parse(File.read("./books.json"),create_additions: true) : []
     @people = File.exists?("./people.json") ? JSON.parse(File.read("./people.json"),create_additions: true) : []
-    @rentals = File.exists?("./rentals.json") ? JSON.parse(File.read("./rentals.json")) : []
+    @rentals = File.exists?("./rentals.json") ? JSON.parse(File.read("./rentals.json"), {create_additions: true}).map {|rental| load_rental_details(rental)} : []
     puts 'Welcome to School Library App!'
     puts ''
   end
@@ -116,6 +116,13 @@ class App
   def save_data
     File.write('books.json', JSON.generate(@books))
     File.write('people.json', JSON.generate(@people))
-    File.write('rentals.json', JSON.generate(@rentals))
+    File.write('rentals.json', JSON.fast_generate(@rentals))
+  end
+
+  
+  def load_rental_details(rental)
+    person = @people.filter { |per| per.id == rental[:person_id]}.first
+    book = @books.filter { |b| b.title == rental[:book_title]}.first
+    Rental.new(rental[:date], person, book)
   end
 end
