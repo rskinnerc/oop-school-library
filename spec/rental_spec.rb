@@ -5,8 +5,8 @@ describe Rental do
     person = double('person')
     book = double('book')
 
-    allow(person).to receive(:rentals) {[]}
-    allow(book).to receive(:rentals) {[]}
+    allow(person).to receive(:rentals) { [] }
+    allow(book).to receive(:rentals) { [] }
 
     rental = Rental.new '2022/07/27', person, book
     expect(rental).to be_an_instance_of Rental
@@ -16,8 +16,8 @@ describe Rental do
     person = double('person')
     book = double('book')
 
-    allow(person).to receive(:rentals) {[]}
-    allow(book).to receive(:rentals) {[]}
+    allow(person).to receive(:rentals) { [] }
+    allow(book).to receive(:rentals) { [] }
 
     rental = Rental.new '2022/07/27', person, book
     expect(rental.date).to eq '2022/07/27'

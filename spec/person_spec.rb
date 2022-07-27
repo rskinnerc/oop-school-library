@@ -24,9 +24,9 @@ describe Person do
 
   it 'should add a new rental' do
     person_object = Person.new 12, 'Person', parent_permission: true
-    book=double("book")
-    allow(book).to receive (:rentals) {[]}
-    person_object.add_rental(book,"27-07-2022")
-    expect(person_object.rentals.length).to be 1 
+    book = double('book')
+    allow(book).to receive(:rentals) { [] }
+    person_object.add_rental(book, '27-07-2022')
+    expect(person_object.rentals.length).to be 1
   end
 end

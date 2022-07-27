@@ -11,7 +11,6 @@ describe Classroom do
     expect(classroom.label).to eq 'ClassRoom Label'
   end
 
-  
   it 'should contain the appropriate instance variable students as an empty array' do
     classroom = Classroom.new 'ClassRoom Label'
     expect(classroom.students).to match_array []
@@ -20,7 +19,7 @@ describe Classroom do
   it 'should contain a new student when the method add_stdent is called' do
     classroom = Classroom.new 'ClassRoom Label'
     student = double('student')
-    allow(student).to receive(:classroom=) {classroom}
+    allow(student).to receive(:classroom=) { classroom }
 
     classroom.add_student(student)
     expect(classroom.students.length).to be 1
